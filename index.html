@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Agent Test</title>
     <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/v2/messenger.js-v2"></script>
     
     <style>
         /* This ensures the background is transparent so it blends into your Google Site */
@@ -20,42 +20,29 @@
         df-messenger {
             z-index: 999;
             position: fixed;
+	    --df-messenger-font-family: Google Sans;
+    --df-messenger-chat-window-height: 500px;
             bottom: 16px;
             right: 16px;
         }
     </style>
 </head>
 <body>
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/v2/messenger.js-v2"></script>
+
     <df-messenger
         location="global"
         project-id="election-chat-487118"
         agent-id="c2b9ac64-7a14-4afa-b72b-ba3ffda7d872"
         language-code="en"
 	intent="WELCOME"
+	allow-fullscreen="true"
+  	allow-clear-chat="true"
         max-query-length="-1">
         <df-messenger-chat-bubble
-            chat-title="AI Assistant">
+            chat-title="AI Assistant"
+	    allow-clear-chat="true">
         </df-messenger-chat-bubble>
     </df-messenger>
-<script>
-  function resetConversation() {
-    const messenger = document.querySelector('df-messenger');
-    
-    // 1. Clears the visual chat history
-    messenger.clearStorage(); 
-    
-    // 2. Forces a new session ID to wipe the Playbook's memory
-    const newSessionId = "session-" + Math.random().toString(36).substring(2, 15);
-    messenger.setAttribute('session-id', newSessionId);
-    
-    // 3. Re-triggers the introduction
-    messenger.renderCustomText("Conversation restarted.");
-    messenger.sendCommand({
-      type: 'event',
-      event: 'WELCOME'
-    });
-  }
-</script>
+
 </body>
 </html>
