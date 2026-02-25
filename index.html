@@ -3,68 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QW Election Chat Support</title>
-    
+    <title>Resident Support - QW Election Chat</title>
     <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-    
     <style>
-        /* Background Styling */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Google Sans', Arial, sans-serif;
-            background-color: #f8f9fa;
+        body { margin: 0; font-family: 'Google Sans', sans-serif; background-color: #f1f3f4; }
+        
+        /* The Floating Reset Button */
+        #chat-reset-trigger {
+            position: fixed;
+            bottom: 90px; /* Sits right above the chat bubble */
+            right: 20px;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 20px;
+            padding: 8px 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+            font-size: 13px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: #3c4043;
+            gap: 5px;
+            transition: all 0.2s;
         }
+        #chat-reset-trigger:hover { background: #f8f9fa; box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
 
-        .welcome-card {
-            text-align: center;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 400px;
-        }
-
-        h1 { font-size: 1.5rem; margin-bottom: 10px; }
-        p { font-size: 1rem; color: #5f6368; }
-
-        /* Your Custom Chatbot Styling */
         df-messenger {
             z-index: 999;
             position: fixed;
-            --df-messenger-font-color: #000;
-            --df-messenger-font-family: Google Sans;
-            --df-messenger-chat-background: #f3f6fc;
-            --df-messenger-message-user-background: #d3e3fd;
-            --df-messenger-message-bot-background: #fff;
             bottom: 16px;
             right: 16px;
+            --df-messenger-font-family: Google Sans;
         }
     </style>
 </head>
 <body>
 
-    <div class="welcome-card">
-        <h1>QW Election Assistant</h1>
-        <p>Welcome! If you have questions regarding the election, please click the chat bubble in the bottom right corner to begin.</p>
-    </div>
+    <button id="chat-reset-trigger" onclick="clearResidentChat()">
+        <span>🔄</span> Restart Conversation
+    </button>
 
     <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
     
     <df-messenger
       project-id="election-chat-487118"
       agent-id="c2b9ac64-7a14-4afa-b72b-ba3ffda7d872"
-      language-code="en"
-      max-query-length="-1">
-      <df-messenger-chat-bubble
-        chat-title="QW Election Chat v3">
-      </df-messenger-chat-bubble>
+      language-code="en">
+      <df-messenger-chat-bubble chat-title="QW Election Chat v3"></df-messenger-chat-bubble>
     </df-messenger>
+
+    <script>
+      function clearResidentChat() {
+        const messenger = document.querySelector('df-messenger');
+        // This clears the Playbook session history completely
+        messenger.clearStorage();
+        alert("Conversation restarted. You can now start a new search.");
+      }
+    </script>
 
 </body>
 </html>
