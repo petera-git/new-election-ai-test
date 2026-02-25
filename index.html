@@ -3,25 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent Test</title>
+    <title>QW Election Chat Support</title>
+    
     <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/v2/messenger.js-v2"></script>
     
     <style>
-        /* This ensures the background is transparent so it blends into your Google Site */
-        body { 
-            margin: 0; 
-            padding: 0; 
-            background-color: transparent; 
-            font-family: 'Google Sans', sans-serif;
+        /* Background Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Google Sans', Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #3c4043;
         }
 
-        /* Styling the Messenger component */
+        .welcome-card {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+
+        h1 { font-size: 1.5rem; margin-bottom: 10px; }
+        p { font-size: 1rem; color: #5f6368; }
+
+        /* Your Custom Chatbot Styling */
         df-messenger {
             z-index: 999;
             position: fixed;
-	    --df-messenger-font-family: Google Sans;
-    --df-messenger-chat-window-height: 500px;
+            --df-messenger-font-color: #000;
+            --df-messenger-font-family: Google Sans;
+            --df-messenger-chat-background: #f3f6fc;
+            --df-messenger-message-user-background: #d3e3fd;
+            --df-messenger-message-bot-background: #fff;
             bottom: 16px;
             right: 16px;
         }
@@ -29,19 +49,21 @@
 </head>
 <body>
 
+    <div class="welcome-card">
+        <h1>QW Election Assistant</h1>
+        <p>Welcome! If you have questions regarding the election, please click the chat bubble in the bottom right corner to begin.</p>
+    </div>
+
+    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+    
     <df-messenger
-        location="global"
-        project-id="election-chat-487118"
-        agent-id="c2b9ac64-7a14-4afa-b72b-ba3ffda7d872"
-        language-code="en"
-	intent="WELCOME"
-	allow-fullscreen="true"
-  	allow-clear-chat="true"
-        max-query-length="-1">
-        <df-messenger-chat-bubble
-            chat-title="AI Assistant"
-	    allow-clear-chat="true">
-        </df-messenger-chat-bubble>
+      project-id="election-chat-487118"
+      agent-id="c2b9ac64-7a14-4afa-b72b-ba3ffda7d872"
+      language-code="en"
+      max-query-length="-1">
+      <df-messenger-chat-bubble
+        chat-title="QW Election Chat v3">
+      </df-messenger-chat-bubble>
     </df-messenger>
 
 </body>
